@@ -9,7 +9,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel HorizontalAlignment="Center" Height="548" Margin="46,47,0,0" VerticalAlignment="Top" Width="381">
-            <Button x:Name="forside_button" Content="Tilbage til Liste" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,65" Height="56"/>
+            <Button x:Name="forside_button" Content="Tilbage til Liste" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,65" Height="56" FontSize="26.667"/>
             <TextBlock x:Name="overskift_textBlock" TextWrapping="Wrap" Text="Opret Gæst:" FontSize="26.667" Margin="0,0,9.8,30" HorizontalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" Height="43" Margin="0,0,0,10">
                 <TextBlock x:Name="navn_textBlock" TextWrapping="Wrap" Text="Navn:" FontSize="26.667" Margin="0,0,10,0" Width="99"/>

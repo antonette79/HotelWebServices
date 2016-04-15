@@ -8,6 +8,28 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel HorizontalAlignment="Left" Height="527" Margin="68,60,0,0" VerticalAlignment="Top" Width="899" Orientation="Horizontal">
+            <StackPanel Width="450" Margin="0,0,0,0.2">
+                <Button x:Name="opret_ny_button" Content="Opret Ny Bruger" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="50,0" FontSize="26.667"/>
+                <TextBlock x:Name="overskrift_textBlock" TextWrapping="Wrap" Text="Ændre eksisterende bruger:" FontSize="35.556" HorizontalAlignment="Center" Margin="0,65,0,50"/>
+                <StackPanel Orientation="Horizontal" Height="43" Margin="20,0,0,10" HorizontalAlignment="Left">
+                    <TextBlock x:Name="navn_textBlock" TextWrapping="Wrap" Text="Navn:" FontSize="26.667" Margin="0,0,10,0" Width="99"/>
+                    <TextBox x:Name="navn_textBox" TextWrapping="Wrap" Text="Indtast Navn" Margin="0,0,0,0.2" Width="270" HorizontalAlignment="Right"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="43" Margin="20,0,0,0" HorizontalAlignment="Left">
+                    <TextBlock x:Name="adresse_textBlock" TextWrapping="Wrap" Text="Adresse:" FontSize="26.667" Margin="0,0,10,0" Width="99"/>
+                    <TextBox x:Name="adresse_textBox" TextWrapping="Wrap" Text="Indtast Adresse" Margin="0,0,0,0.2" Width="270" HorizontalAlignment="Left"/>
+
+                </StackPanel>
+                <Button x:Name="aendre_button" Content="Ændre Gæst" HorizontalAlignment="Right" Margin="0,20,40,0" />
+
+            </StackPanel>
+            <StackPanel Width="443" Margin="0,0,0,0.2">
+                <ListView x:Name="listView" Height="524" Margin="0,0,0.2,0"/>
+            </StackPanel>
+
+        </StackPanel>
+
 
     </Grid>
 </Page>
