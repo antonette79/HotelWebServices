@@ -1,11 +1,16 @@
 ﻿<Page
-    x:Class="WebClient.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WebClient"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:WebClient.ViewModel"
+    x:Class="WebClient.MainPage"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModel:ViewModel/>
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel HorizontalAlignment="Left" Height="527" Margin="68,60,0,0" VerticalAlignment="Top" Width="899" Orientation="Horizontal">
@@ -14,22 +19,20 @@
                 <TextBlock x:Name="overskrift_textBlock" TextWrapping="Wrap" Text="Ændre eksisterende bruger:" FontSize="35.556" HorizontalAlignment="Center" Margin="0,65,0,50"/>
                 <StackPanel Orientation="Horizontal" Height="43" Margin="20,0,0,10" HorizontalAlignment="Left">
                     <TextBlock x:Name="navn_textBlock" TextWrapping="Wrap" Text="Navn:" FontSize="26.667" Margin="0,0,10,0" Width="99"/>
-                    <TextBox x:Name="navn_textBox" TextWrapping="Wrap" Text="Indtast Navn" Margin="0,0,0,0.2" Width="270" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="navn_textBox" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0.2" Width="270" HorizontalAlignment="Right"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="43" Margin="20,0,0,0" HorizontalAlignment="Left">
                     <TextBlock x:Name="adresse_textBlock" TextWrapping="Wrap" Text="Adresse:" FontSize="26.667" Margin="0,0,10,0" Width="99"/>
-                    <TextBox x:Name="adresse_textBox" TextWrapping="Wrap" Text="Indtast Adresse" Margin="0,0,0,0.2" Width="270" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="adresse_textBox" TextWrapping="Wrap" Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0.2" Width="270" HorizontalAlignment="Left"/>
 
                 </StackPanel>
                 <Button x:Name="aendre_button" Content="Ændre Gæst" HorizontalAlignment="Right" Margin="0,20,40,0" />
 
             </StackPanel>
             <StackPanel Width="443" Margin="0,0,0,0.2">
-                <ListView x:Name="listView" Height="524" Margin="0,0,0.2,0"/>
+                <ListView x:Name="GuestListView" Height="524" Margin="0,0,0.2,0" ItemsSource="{Binding Guests.Guests}" />
             </StackPanel>
 
         </StackPanel>
-
-
     </Grid>
 </Page>

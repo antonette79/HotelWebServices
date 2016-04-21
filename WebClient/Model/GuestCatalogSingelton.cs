@@ -8,25 +8,24 @@ namespace WebClient.Model
 
         private GuestCatalogSingelton()
         {
-            var guests = new ObservableCollection<Guest>();
+            Guests = new ObservableCollection<Guest>();
         }
 
-        public ObservableCollection<Guest> guests { get; set; }
+        public ObservableCollection<Guest> Guests { get; set; }
 
         public static GuestCatalogSingelton Instance
         {
-            get { return _instance ?? (_instance = new GuestCatalogSingelton()); }
-            
+            get { return _instance ?? (_instance = new GuestCatalogSingelton()); }      
         }
 
         public void Add(Guest newGuest)
         {
-            guests.Add(newGuest);
+            Guests.Add(newGuest);
         }
 
         public void Remove(Guest removeGuest)
         {
-            guests.Remove(removeGuest);
+            Guests.Remove(removeGuest);
         }
     }
 }
