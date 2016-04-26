@@ -15,7 +15,7 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel HorizontalAlignment="Left" Height="527" Margin="68,60,0,0" VerticalAlignment="Top" Width="899" Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Left" Height="527" Margin="68,60,0,0" VerticalAlignment="Top" Width="946" Orientation="Horizontal">
             <StackPanel Width="450" Margin="0,0,0,0.2">
                 <Button x:Name="OpretNyButton" Content="Opret Ny Bruger" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="50,0" FontSize="26.667">
                     <interactivity:Interaction.Behaviors>
@@ -42,9 +42,9 @@
                     </interactivity:Interaction.Behaviors>
                 </Button>
             </StackPanel>
-            <StackPanel Width="443" Margin="0,0,0,0.2">
-                    <ListView x:Name="GuestListView" Height="492" Margin="0,0,0.2,0" ItemsSource="{Binding Guests.Guests, Mode=TwoWay}" SelectedItem="{Binding SelectedGuest, Mode=TwoWay}" />
-                <Button x:Name="ButtonVaelgGaest" Content="Slet Gæst" HorizontalAlignment="Right">
+            <StackPanel Width="443" Margin="35,0,0,0.2">
+                    <ListView x:Name="GuestListView" Height="492" Margin="79,0,0.2,0" ItemsSource="{Binding Guests.Guests, Mode=TwoWay}" SelectedItem="{Binding SelectedGuest, Mode=TwoWay}" />
+                <Button x:Name="ButtonSletGaest" Content="Slet Gæst" HorizontalAlignment="Right" Margin="0,5,0,0">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
                             <core:CallMethodAction MethodName="DeleteGuestAsync" TargetObject="{Binding Mode=OneWay}"/>
