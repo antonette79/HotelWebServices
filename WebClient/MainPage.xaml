@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="using:WebClient.ViewModel"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     x:Class="WebClient.MainPage"
     mc:Ignorable="d">
 
@@ -15,23 +17,36 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel HorizontalAlignment="Left" Height="527" Margin="68,60,0,0" VerticalAlignment="Top" Width="899" Orientation="Horizontal">
             <StackPanel Width="450" Margin="0,0,0,0.2">
-                <Button x:Name="opret_ny_button" Content="Opret Ny Bruger" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="50,0" FontSize="26.667"/>
-                <TextBlock x:Name="overskrift_textBlock" TextWrapping="Wrap" Text="Ændre eksisterende bruger:" FontSize="35.556" HorizontalAlignment="Center" Margin="0,65,0,50"/>
+                <Button x:Name="OpretNyButton" Content="Opret Ny Bruger" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="50,0" FontSize="26.667"/>
+                <TextBlock x:Name="OverskriftTextBlock" TextWrapping="Wrap" Text="Ændre eksisterende bruger:" FontSize="35.556" HorizontalAlignment="Center" Margin="0,65,0,50"/>
                 <StackPanel Orientation="Horizontal" Height="43" Margin="20,0,0,10" HorizontalAlignment="Left">
-                    <TextBlock x:Name="navn_textBlock" TextWrapping="Wrap" Text="Navn:" FontSize="26.667" Margin="0,0,10,0" Width="99"/>
-                    <TextBox x:Name="navn_textBox" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0.2" Width="270" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="NavnTextBlock" TextWrapping="Wrap" Text="Navn:" FontSize="26.667" Margin="0,0,10,0" Width="99"/>
+                    <TextBox x:Name="NavnTextBox" TextWrapping="Wrap" Text="{Binding SelectedGuest.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0.2" Width="270" HorizontalAlignment="Right"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="43" Margin="20,0,0,0" HorizontalAlignment="Left">
-                    <TextBlock x:Name="adresse_textBlock" TextWrapping="Wrap" Text="Adresse:" FontSize="26.667" Margin="0,0,10,0" Width="99"/>
-                    <TextBox x:Name="adresse_textBox" TextWrapping="Wrap" Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0.2" Width="270" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="AdresseTextBlock" TextWrapping="Wrap" Text="Adresse:" FontSize="26.667" Margin="0,0,10,0" Width="99"/>
+                    <TextBox x:Name="AdresseTextBox" TextWrapping="Wrap" Text="{Binding SelectedGuest.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0.2" Width="270" HorizontalAlignment="Left"/>
 
                 </StackPanel>
-                <Button x:Name="aendre_button" Content="Ændre Gæst" HorizontalAlignment="Right" Margin="0,20,40,0" />
-
+                <Button x:Name="AendreButton" Content="Ændre Gæst" HorizontalAlignment="Right" Margin="0,20,40,0" >
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Click">
+                            <core:CallMethodAction MethodName="PutGuestAsync" TargetObject="{Binding Mode=OneWay}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </Button>
             </StackPanel>
             <StackPanel Width="443" Margin="0,0,0,0.2">
-                <ListView x:Name="GuestListView" Height="524" Margin="0,0,0.2,0" ItemsSource="{Binding Guests.Guests}" />
+                    <ListView x:Name="GuestListView" Height="492" Margin="0,0,0.2,0" ItemsSource="{Binding Guests.Guests, Mode=TwoWay}" SelectedItem="{Binding SelectedGuest, Mode=TwoWay}" />
+                <Button x:Name="ButtonVaelgGaest" Content="Vælg Gæst" HorizontalAlignment="Right">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Click">
+                            <core:CallMethodAction MethodName="SelectGuest()"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </Button>
             </StackPanel>
+
 
         </StackPanel>
     </Grid>
