@@ -77,7 +77,7 @@ namespace WebClient.Facade
                 return Guest;
             }
         }
-        public static async Task<string> PostGuest(Guest guest)
+        public static async Task<string> PostGuestAsync(Guest guest)
         {
             Guest = guest;
             HttpClientHandler handler = new HttpClientHandler
@@ -104,7 +104,7 @@ namespace WebClient.Facade
                 }
             }
         }
-        public static async Task<string> DeleteGuest(Guest guest)
+        public static async Task<string> DeleteGuestAsync(Guest guest)
         {
             Guest = guest;
             HttpClientHandler handler = new HttpClientHandler {UseDefaultCredentials = true};

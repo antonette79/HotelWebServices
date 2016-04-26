@@ -17,7 +17,13 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel HorizontalAlignment="Left" Height="527" Margin="68,60,0,0" VerticalAlignment="Top" Width="899" Orientation="Horizontal">
             <StackPanel Width="450" Margin="0,0,0,0.2">
-                <Button x:Name="OpretNyButton" Content="Opret Ny Bruger" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="50,0" FontSize="26.667"/>
+                <Button x:Name="OpretNyButton" Content="Opret Ny Bruger" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="50,0" FontSize="26.667">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Click">
+                            <core:NavigateToPageAction TargetPage="WebClient.View.OpretGuest"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </Button>
                 <TextBlock x:Name="OverskriftTextBlock" TextWrapping="Wrap" Text="Ændre eksisterende bruger:" FontSize="35.556" HorizontalAlignment="Center" Margin="0,65,0,50"/>
                 <StackPanel Orientation="Horizontal" Height="43" Margin="20,0,0,10" HorizontalAlignment="Left">
                     <TextBlock x:Name="NavnTextBlock" TextWrapping="Wrap" Text="Navn:" FontSize="26.667" Margin="0,0,10,0" Width="99"/>
@@ -38,10 +44,10 @@
             </StackPanel>
             <StackPanel Width="443" Margin="0,0,0,0.2">
                     <ListView x:Name="GuestListView" Height="492" Margin="0,0,0.2,0" ItemsSource="{Binding Guests.Guests, Mode=TwoWay}" SelectedItem="{Binding SelectedGuest, Mode=TwoWay}" />
-                <Button x:Name="ButtonVaelgGaest" Content="Vælg Gæst" HorizontalAlignment="Right">
+                <Button x:Name="ButtonVaelgGaest" Content="Slet Gæst" HorizontalAlignment="Right">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
-                            <core:CallMethodAction MethodName="SelectGuest()"/>
+                            <core:CallMethodAction MethodName="DeleteGuestAsync" TargetObject="{Binding Mode=OneWay}"/>
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </Button>

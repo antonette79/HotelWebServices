@@ -17,7 +17,33 @@ namespace WebClient.ViewModel
     {
         #region Propeties
         public GuestCatalogSingelton Guests { get; set; }
-        private Guest _selectedGuest = new Guest();
+
+        private Guest _selectedGuest = new Guest();        
+        #region For Add new Guest
+        private int _guestNo;
+        private string _name;
+        private string _address;
+
+
+        public int Guest_No
+        {
+            get { return _guestNo; }
+            set { _guestNo = value; OnPropertyChanged(); }
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; OnPropertyChanged(); }
+        }
+
+        public string Address
+        {
+            get { return _address; }
+            set { _address = value; OnPropertyChanged(); }
+        } 
+        #endregion
+
         public Guest SelectedGuest
         {
             get { return _selectedGuest; }
@@ -33,26 +59,27 @@ namespace WebClient.ViewModel
         public ViewModel()
         {
             Guests = GuestCatalogSingelton.Instance;
-
-            //Guests.Add(new Guest(1, "Flunky Foe", "Roskildevej 98, 4000 Roskilde"));
-            //Guests.Add(new Guest(2, "Betta Boe", "Holbækvej 128, 4300 Holbæk"));
-            //Guests.Add(new Guest(3, "Hola Hup", "Ringstedvej 13, 4300 Holbæk"));
-            //Guests.Add(new Guest(4,"Skipping School", "Københavnsvej 456, 3400 Valby"));
-
             GetGuests();
         }
         #endregion
 
+        
         public async void PutGuestAsync()
         {
-            //var guest = new Guest(SelectedGuest.Guest_No, Name, Address);
             var msg = await GuestFacade.PutGuestAsync(SelectedGuest, SelectedGuest.Guest_No);
 
             MessageDialog message = new MessageDialog(msg);
             await message.ShowAsync();
             GetGuests();
+        }
 
+        public async void DeleteGuestAsync()
+        {
+            var msg = await GuestFacade.DeleteGuestAsync(SelectedGuest);
 
+            MessageDialog message = new MessageDialog(msg);
+            await message.ShowAsync();
+            GetGuests();
         }
         public async void GetGuests()
         {
@@ -64,27 +91,28 @@ namespace WebClient.ViewModel
                 Guests.Add(item);
             }
         }
-
-        public void SelectGuest()
+        public async void PostGuestAsync()
         {
-            if (SelectedGuest != null)
-            {
-                Guest_No = SelectedGuest.Guest_No;
-                Name = SelectedGuest.Name;
-                Address = SelectedGuest.Address;
+            Guest newGuest = new Guest(HighestGuestNo() +1, Name, Address);
+            var msg = await GuestFacade.PostGuestAsync(newGuest);
 
-            }
-            else
-            {
-                MessageDialog messageDialog = new MessageDialog("Fejl", "Kunne ikke sætte bruger til admin!!!");
-            }
-        }
-
-        public void PopulateList()
-        {
-            Guests.Guests.Clear();
+            MessageDialog message = new MessageDialog(msg);
+            await message.ShowAsync();
             GetGuests();
         }
+        private int HighestGuestNo()
+        {
+            int i = -1;
+            foreach (var guest in Guests.Guests)
+            {
+                if (guest.Guest_No > i)
+                {
+                    i = guest.Guest_No;
+                }
+            }
+            return i;
+        }
+
 
         #region PropertyChangedSupport
         public event PropertyChangedEventHandler PropertyChanged;
